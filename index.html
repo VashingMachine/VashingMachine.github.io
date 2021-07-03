@@ -3,19 +3,26 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=maximum-scale, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Egzamin Licencjacki</title>
     <style>
+        *, *::after, *::before {
+            box-sizing: border-box;
+        }
+
         body {
-            font-size: 3em;
+            font-size: 3vh;
+            width: 90%;
+            margin: auto;
+            height: 100%;
         }
 
         input[type=submit] {
-            font-size: 2em;
+            font-size: 3vh;
         }
 
         input[type=checkbox]{
-            transform: scale(3.5);
+            transform: scale(1.5);
             padding: 10px;
             margin-right: 20px;
             vertical-align: middle;
@@ -27,13 +34,13 @@
     <form method="post" onsubmit="generate(event)">      
         <fieldset>      
             <legend>Jaki dział wariacie?</legend>      
-            <input type="checkbox" name="topic" value="algebra" checked>Algebra<br>      
-            <input type="checkbox" name="topic" value="real" checked>Analiza matematyczna II<br>      
-            <input type="checkbox" name="topic" value="functional" checked>Analiza funkcjonalna<br>
-            <input type="checkbox" name="topic" value="probability" checked>Rachunek prawdopodobieństwa<br>
-            <input type="checkbox" name="topic" value="ode" checked>Równania różniczkowe<br>
-            <input type="checkbox" name="topic" value="topology" checked>Topologia<br>
-            <input type="checkbox" name="topic" value="graduate" checked>Pytania z licencjatu<br>      
+            <label><input type="checkbox" name="topic" value="algebra" checked>Algebra</label><br>      
+            <label><input type="checkbox" name="topic" value="real" checked>Analiza matematyczna II</label><br>      
+            <label><input type="checkbox" name="topic" value="functional" checked>Analiza funkcjonalna</label><br>
+            <label><input type="checkbox" name="topic" value="probability" checked>Rachunek prawdopodobieństwa</label><br>
+            <label><input type="checkbox" name="topic" value="ode" checked>Równania różniczkowe</label><br>
+            <label><input type="checkbox" name="topic" value="topology" checked>Topologia</label><br>
+            <label><input type="checkbox" name="topic" value="graduate" checked>Pytania z licencjatu</label><br>      
             <br>      
             <input type="submit" value="Generuj egzamin now" />      
         </fieldset>      
