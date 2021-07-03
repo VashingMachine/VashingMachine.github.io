@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=maximum-scale, initial-scale=1.0">
+    <title>Egzamin Licencjacki</title>
+    <style>
+        body {
+            font-size: 3em;
+        }
+
+        input[type=submit] {
+            font-size: 2em;
+        }
+
+        input[type=checkbox]{
+            transform: scale(3.5);
+            padding: 10px;
+            margin-right: 20px;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+
+<body>
+    <form method="post" onsubmit="generate(event)">      
+        <fieldset>      
+            <legend>Jaki dział wariacie?</legend>      
+            <input type="checkbox" name="topic" value="algebra" checked>Algebra<br>      
+            <input type="checkbox" name="topic" value="real" checked>Analiza matematyczna II<br>      
+            <input type="checkbox" name="topic" value="functional" checked>Analiza funkcjonalna<br>
+            <input type="checkbox" name="topic" value="probability" checked>Rachunek prawdopodobieństwa<br>
+            <input type="checkbox" name="topic" value="ode" checked>Równania różniczkowe<br>
+            <input type="checkbox" name="topic" value="topology" checked>Topologia<br>
+            <input type="checkbox" name="topic" value="graduate" checked>Pytania z licencjatu<br>      
+            <br>      
+            <input type="submit" value="Generuj egzamin now" />      
+        </fieldset>      
+    </form>
+
+    <article class="questions_article">
+        <header class='questions_header'>
+            Pytania:
+        </header>
+        <section class="questions_section">
+            <ul id="questions_list">
+
+            </ul>
+        </section>
+    </article>
+
+    <footer class='footer'>
+    </footer>
+    <script>
+        
+        let topics = {
+            algebra: [
+                'Przestrzeń liniowa, baza i wymiar.',
+                'Odwzorowania liniowe i ich macierze. Rząd macierzy, wyznacznik, wartości i wektory własne.',
+                'Grupy i ich homomorfizmy, podgrupy normalne, grupy ilorazowe. Twierdzenie Lagrange’a.',
+                'Pierścienie i ciała. Ideał, pierścień ilorazowy. Ideały pierwsze i maksymalne.'
+            ],
+            real: [
+                'Miara Lebesgue’a w R^n i jej własności.',
+                'Mierzalność zbioru i funkcji w sensie Lebesgue’a, przykłady zbiorów miary zero, istnienie zbiorów niemierzalnych.',
+                'Całka Lebesgue’a i jej związek z całką Riemanna. Funkcje całkowalne.',
+                'Twierdzenie Fubiniego.'
+            ],
+            functional: [
+                'Definicja i podstawowe własności przestrzeni Banacha. Przykłady przestrzeni Banacha nieskończonego wymiaru.',
+                'Operatory ograniczone w przestrzeniach Banacha, norma operatora, przykłady.',
+                'Definicja i podstawowe własności przestrzeni Hilberta. Przestrzenie L^p(a,b), l^p',
+                'Operator sprzężony, samosprzężony, unitarny w przestrzeni Hilberta, przykłady.'
+            ],
+            probability: [
+                'Przestrzeń probabilistyczna, definicja i własności.',
+                'Prawdopodobieństwo warunkowe, całkowite, wzór Bayesa, niezależność zdarzeń.',
+                'Zmienne losowe typu dyskretnego i ciągłego. Rozkład zmiennej losowej. Dystrybuanta. Wartość oczekiwana i wariancja.'
+            ],
+            ode: [
+                'Twierdzenie Peano i twierdzenia stosowane w jego dowodzie.',
+                'Twierdzenie Picarda i twierdzenia stosowane w jego dowodzie.',
+                'Postać rozwiązań liniowego równania różniczkowego n-tego rzędu o stałych współczynnikach.',
+                'Macierz fundamentalna dla układu liniowego i jej zastosowania.'
+            ],
+            topology: [
+                'Przestrzenie metryczne.',
+                'Odwzorowania ciągłe w przestrzeniach metrycznych. Homeomorfizmy.',
+                'Zwarte przestrzenie metryczne. Własności przestrzeni zwartych.',
+                'Przestrzenie metryczne zupełne. Twierdzenie Banacha o odwzorowaniu zwężającym.'
+            ],
+            graduate: [
+                'Granica i ciągłość funkcji wielu zmiennych. Własności funkcji ciągłych na zbiorach zwartych',
+                'Pochodna funkcji i jej związki z pochodnymi cząstkowymi.',
+                'Warunki konieczne i dostateczne istnienia ekstremów funkcji.',
+                'Zamiana zmiennych w całkach wielokrotnych i krzywoliniowych.',
+                'Zbieżność punktowa i jednostajna ciągu funkcji.',
+                'Twierdzenie Kroneckera-Capelli’ego.',
+                'Podobieństwo macierzy kwadratowych. Wartości i wektory własne macierzy podobnych.',
+                'Postać Jordana macierzy.'
+            ]
+        };
+
+        function generate(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            const formData = new FormData(event.target);
+            const selected = formData.getAll('topic');
+            const active_questions = Array.prototype.concat(...selected.map(s => topics[s]));
+            const shuffled = active_questions.sort(() => 0.5 - Math.random());
+            const questions = active_questions.slice(0, 3);
+            const container = document.getElementById('questions_list');
+            container.innerHTML = '';
+            const questions_html = questions.forEach(q => {
+                const element = document.createElement('li');
+                const text = document.createTextNode(q);
+                element.append(text);
+                container.append(element);
+            });
+        };
+
+    </script>
+</body>
+
+</html>
